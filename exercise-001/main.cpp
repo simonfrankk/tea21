@@ -7,6 +7,8 @@
 #include "CLI/CLI.hpp"
 #include "config.h"
 
+int foo
+
 auto main(int argc, char **argv) -> int
 {
     /**
@@ -17,5 +19,5 @@ auto main(int argc, char **argv) -> int
     fmt::print("Hello, {}!\n", "hello");
     return 0; /* exit gracefully*/
 
-    
+
 }
