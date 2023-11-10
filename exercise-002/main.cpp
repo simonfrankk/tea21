@@ -23,9 +23,10 @@ auto main(int argc, char **argv) -> int
     try
     {
         app.set_version_flag("-V,--version", fmt::format("{} {}", PROJECT_VER, PROJECT_BUILD_DATE));
-        app.parse(argc, argv);
         //Aufgabenteil 1 - Parameterabfrage count
         app.add_option("-c,--count", count, "Set the count parameter")->check(CLI::PositiveNumber);
+
+        app.parse(argc, argv);
     }
     catch (const CLI::ParseError &e)
     {
@@ -60,7 +61,7 @@ auto main(int argc, char **argv) -> int
     auto end = std::chrono::high_resolution_clock::now();
     
     // Berechnen Zeitdauer
-    auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
 
     // Ausgeben sortierte Werte
     fmt::print("Sorted Values: ");
@@ -70,7 +71,7 @@ auto main(int argc, char **argv) -> int
     fmt::print("\n");
 
     // Ausgeben Sortierung
-    fmt::print("Time taken to sort: {} microseconds\n", elapsed.count());
+    fmt::print("Time taken to sort: {} nanoseconds\n", elapsed.count());
 
     /* INSERT YOUR CODE HERE */
 
