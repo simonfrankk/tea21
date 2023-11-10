@@ -4,6 +4,10 @@
 #include "CLI/CLI.hpp"
 #include "config.h"
 
+#include <vector>   // Für std::vector
+#include <random>   // Für std::random_device und std::mt19937
+
+
 auto main(int argc, char **argv) -> int
 {
     /**
@@ -31,6 +35,20 @@ auto main(int argc, char **argv) -> int
      * More info at https://fmt.dev/latest/api.html
      */
     fmt::print("Hello, {}!\n", app.get_name());
+
+    // Erstellen eines std::vector<int> mit der Größe von 'count' und füllen mit zufälligen Werten von 1 bis 100
+    std::vector<int> randomValues;
+    
+    // Initialisieren eines Zufallszahlengenerator
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> dist(1, 100);  // Verteilung von 1 bis 100
+
+    for (int i = 0; i < count; ++i) {
+        randomValues.push_back(dist(gen));
+    }
+
+
 
     /* INSERT YOUR CODE HERE */
 
