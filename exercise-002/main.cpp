@@ -7,6 +7,7 @@
 #include <vector>   // Für std::vector
 #include <random>   // Für std::random_device und std::mt19937
 #include <algorithm> // Für std::sort
+#include <chrono>    // Für std::chrono
 
 
 
@@ -23,7 +24,7 @@ auto main(int argc, char **argv) -> int
     {
         app.set_version_flag("-V,--version", fmt::format("{} {}", PROJECT_VER, PROJECT_BUILD_DATE));
         app.parse(argc, argv);
-        //NEU:
+        //Aufgabenteil 1 - Parameterabfrage count
         app.add_option("-c,--count", count, "Set the count parameter")->check(CLI::PositiveNumber);
     }
     catch (const CLI::ParseError &e)
@@ -38,10 +39,10 @@ auto main(int argc, char **argv) -> int
      */
     fmt::print("Hello, {}!\n", app.get_name());
 
-    // Erstellen eines std::vector<int> mit der Größe von 'count' und füllen mit zufälligen Werten von 1 bis 100
+    // Erstellen Vektor mit der Größe von 'count' und füllen mit zufälligen Werten von 1 bis 100
     std::vector<int> randomValues;
     
-    // Initialisieren eines Zufallszahlengenerator
+    // Initialisieren Zufallszahlengenerator
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<int> dist(1, 100);  // Verteilung von 1 bis 100
@@ -49,18 +50,27 @@ auto main(int argc, char **argv) -> int
     for (int i = 0; i < count; ++i) {
         randomValues.push_back(dist(gen));
     }
+    // Startzeit messen
+    auto start = std::chrono::high_resolution_clock::now();
 
-      // Sortieren Sie den Vektor
+    // Sortieren Vektor
     std::sort(randomValues.begin(), randomValues.end());
 
-    // Geben Sie die sortierten Werte aus
+    // Endzeit messen
+    auto end = std::chrono::high_resolution_clock::now();
+    
+    // Berechnen Zeitdauer
+    auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+
+    // Ausgeben sortierte Werte
     fmt::print("Sorted Values: ");
     for (int value : randomValues) {
         fmt::print("{} ", value);
     }
     fmt::print("\n");
 
-
+    // Ausgeben Sortierung
+    fmt::print("Time taken to sort: {} microseconds\n", elapsed.count());
 
     /* INSERT YOUR CODE HERE */
 
