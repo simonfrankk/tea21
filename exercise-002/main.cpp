@@ -11,10 +11,14 @@ auto main(int argc, char **argv) -> int
      * More info at https://github.com/CLIUtils/CLI11#usage
      */
     CLI::App app{PROJECT_NAME};
+    int count = 20;  // Standardwert für count
+
     try
     {
         app.set_version_flag("-V,--version", fmt::format("{} {}", PROJECT_VER, PROJECT_BUILD_DATE));
         app.parse(argc, argv);
+        //NEU:
+        app.add_option("-c,--count", count, "Set the count parameter")->check(CLI::PositiveNumber);
     }
     catch (const CLI::ParseError &e)
     {
