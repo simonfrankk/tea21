@@ -73,7 +73,5 @@ auto main(int argc, char **argv) -> int
     // Ausgeben Sortierung
     fmt::print("Time taken to sort: {} nanoseconds\n", elapsed.count());
 
-    /* INSERT YOUR CODE HERE */
-
     return 0; /* exit gracefully*/
 }
