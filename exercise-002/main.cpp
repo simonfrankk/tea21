@@ -6,6 +6,8 @@
 
 #include <vector>   // Für std::vector
 #include <random>   // Für std::random_device und std::mt19937
+#include <algorithm> // Für std::sort
+
 
 
 auto main(int argc, char **argv) -> int
@@ -47,6 +49,16 @@ auto main(int argc, char **argv) -> int
     for (int i = 0; i < count; ++i) {
         randomValues.push_back(dist(gen));
     }
+
+      // Sortieren Sie den Vektor
+    std::sort(randomValues.begin(), randomValues.end());
+
+    // Geben Sie die sortierten Werte aus
+    fmt::print("Sorted Values: ");
+    for (int value : randomValues) {
+        fmt::print("{} ", value);
+    }
+    fmt::print("\n");
 
 
 
